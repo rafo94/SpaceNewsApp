@@ -110,13 +110,6 @@
                 android:layout_height="@dimen/dp_64"
                 android:layout_marginStart="@dimen/dp_20"
                 app:srcCompat="@drawable/ic_linkedin" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/github"
-                android:layout_width="@dimen/dp_64"
-                android:layout_height="@dimen/dp_64"
-                android:layout_marginStart="@dimen/dp_20"
-                app:srcCompat="@drawable/ic_github" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatTextView

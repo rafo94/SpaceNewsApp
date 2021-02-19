@@ -58,7 +58,3 @@ fun linkedinIntent(pm: PackageManager): Intent {
     }
     return intent
 }
-
-fun githubIntent(): Intent {
-    return Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_URL))
-}

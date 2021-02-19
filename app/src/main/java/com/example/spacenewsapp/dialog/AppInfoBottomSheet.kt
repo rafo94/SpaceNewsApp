@@ -12,11 +12,9 @@ import android.view.ViewGroup
 import coil.load
 import com.example.spacenewsapp.BuildConfig
 import com.example.spacenewsapp.R
-import com.example.spacenewsapp.util.Constants.Companion.FACEBOOK_URL
 import com.example.spacenewsapp.util.Constants.Companion.PROFILE_URL
 import com.example.spacenewsapp.util.Constants.Companion.PROJECT_URL
 import com.example.spacenewsapp.util.facebookIntent
-import com.example.spacenewsapp.util.githubIntent
 import com.example.spacenewsapp.util.linkedinIntent
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_app_info.*
@@ -42,7 +40,6 @@ class AppInfoBottomSheet : BottomSheetDialogFragment() {
 
         facebook.setOnClickListener { startActivity(facebookIntent(requireActivity().packageManager)) }
         linkedin.setOnClickListener { startActivity(linkedinIntent(requireActivity().packageManager)) }
-        github.setOnClickListener { startActivity(githubIntent()) }
     }
 
     override fun onResume() {
