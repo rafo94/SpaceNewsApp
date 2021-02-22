@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             if (news.isNotEmpty()) {
                 animationView.visibility = View.GONE
                 animationView.cancelAnimation()
+                connectionTitle.visibility = View.GONE
                 newsAdapter.setNewData(news)
             } else {
                 animationView.setAnimation(R.raw.astronaut)
@@ -60,11 +61,14 @@ class MainActivity : AppCompatActivity() {
 
         connectionLiveData.observe(this, { isConnected ->
             if (isConnected) {
+                swipe.isRefreshing = true
                 newsViewModel.getAllNews()
             } else {
+                swipe.isRefreshing = false
                 newsAdapter.clearData()
                 animationView.setAnimation(R.raw.no_internet_connection)
                 animationView.visibility = View.VISIBLE
+                connectionTitle.visibility = View.VISIBLE
             }
         })
     }
