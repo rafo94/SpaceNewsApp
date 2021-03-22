@@ -6,15 +6,18 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.spacenewsapp.adapter.NewsAdapter
 import com.example.spacenewsapp.dialog.AppInfoBottomSheet
 import com.example.spacenewsapp.dialog.AppInfoBottomSheet.Companion.TAG_APP_INFO_DIALOG
 import com.example.spacenewsapp.dialog.NewsBottomSheet
 import com.example.spacenewsapp.dialog.NewsBottomSheet.Companion.TAG_NEWS_DIALOG
+import com.example.spacenewsapp.util.launchWhenStarted
 import com.example.spacenewsapp.viewmodel.ConnectionLiveData
 import com.example.spacenewsapp.viewmodel.NewsViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun itemViewModel() {
-        newsViewModel.newsResponseLiveData.observe(this, { news ->
+        newsViewModel.newsResponseData.onEach { news ->
             if (news.isNotEmpty()) {
                 animationView.visibility = View.GONE
                 animationView.cancelAnimation()
@@ -53,11 +56,12 @@ class MainActivity : AppCompatActivity() {
                 animationView.visibility = View.VISIBLE
             }
             swipe.isRefreshing = false
-        })
-        newsViewModel.newsResponseErrorLiveData.observe(this, {
+        }.launchWhenStarted(lifecycleScope)
+
+        newsViewModel.newsResponseErrorData.onEach {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             swipe.isRefreshing = false
-        })
+        }.launchWhenStarted(lifecycleScope)
 
         connectionLiveData.observe(this, { isConnected ->
             if (isConnected) {

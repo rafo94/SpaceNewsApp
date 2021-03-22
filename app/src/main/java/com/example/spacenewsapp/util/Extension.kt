@@ -6,9 +6,12 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.net.Uri
+import androidx.lifecycle.LifecycleCoroutineScope
 import com.example.spacenewsapp.util.Constants.Companion.FACEBOOK_URL
 import com.example.spacenewsapp.util.Constants.Companion.GITHUB_URL
 import com.example.spacenewsapp.util.Constants.Companion.LINKEDIN_URL
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -57,4 +60,8 @@ fun linkedinIntent(pm: PackageManager): Intent {
         intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.linkedin.com/profile/view?id=$LINKEDIN_URL"))
     }
     return intent
+}
+
+fun <T> Flow<T>.launchWhenStarted(lifecycleScope: LifecycleCoroutineScope) {
+    lifecycleScope.launchWhenStarted { this@launchWhenStarted.collect() }
 }

@@ -59,11 +59,6 @@ dependencies {
     implementation "org.koin:koin-core:$koinAndroidVersion"
     implementation "org.koin:koin-androidx-viewmodel:$koinAndroidVersion"
 
-    // navigation component
-    def navigationVersion = '2.3.3'
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-
     //coil
     def coilVersion = '1.1.1'
     implementation "io.coil-kt:coil:$coilVersion"
@@ -77,6 +72,6 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$refreshVersion"
 
     //circular image view
-    def circularIVVersion = "4.2.0"
-    implementation "com.mikhaellopez:circularimageview:$circularIVVersion"
+    def circularIvVersion = "4.2.0"
+    implementation "com.mikhaellopez:circularimageview:$circularIvVersion"
 }
